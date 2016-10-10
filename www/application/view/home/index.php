@@ -1,4 +1,95 @@
-<div class="container">
-    <h2>You are in the View: application/view/home/index.php (everything in the box comes from this file)</h2>
-    <p>In a real application this could be the homepage.</p>
+<div class="ui four padded column grid">
+  <div class="eight wide mobile four wide computer column">
+    <div class="green inverted ui segment center">
+  		<h1>Glycémie Jérémy</h1>
+  		<div class="ui inverted statistic">
+		  <div class="value">
+		    8.5
+		  </div>
+		  <div class="label">
+		    mmol/L
+		  </div>
+		</div>
+		<span style="font-size:60px">↘︎</span>
+    </div>
+  </div>
+  <div class="eight wide mobile four wide computer column">
+    <div class="yellow inverted ui segment">
+    	<!-- Begin WeatherLink Fragment -->
+		<iframe title="Environment Canada Weather" width="350px" height="191px" src="//weather.gc.ca/wxlink/wxlink.html?cityCode=qc-13&amp;lang=f" allowtransparency="true" frameborder="0"></iframe>
+		<!-- End WeatherLink Fragment -->
+    </div>
+  </div>
+  <div class="eight wide mobile four wide computer column">
+    <div class="blue inverted ui segment">
+    </div>
+  </div>
+  <div class="eight wide mobile four wide computer column">
+    <div class="orange inverted ui segment center">
+  		<h1>Glycémie Maxime</h1>
+  		<div class="ui inverted statistic">
+		  <div class="value">
+		    5.3
+		  </div>
+		  <div class="label">
+		    mmol/L
+		  </div>
+		</div>
+		<span style="font-size:60px">→︎</span>
+    </div>
+  </div>
+  <div class="eight wide mobile four wide computer column">
+    <div class="pink inverted ui segment">Content</div>
+  </div>
+  <div class="eight wide mobile four wide computer column">
+    <div class="teal inverted ui segment">Content</div>
+  </div>
 </div>
+<!-- <div class="ui equal width center aligned padded grid">
+  <div class="row">
+    <div class="olive column">
+      Olive
+    </div>
+    <div class="black column">
+      Black
+    </div>
+  </div>
+  <div class="row" style="background-color: #869D05;color: #FFFFFF;">
+    <div class="column">Custom Row</div>
+  </div>
+  <div class="row">
+    <div class="black column">
+      Black
+    </div>
+    <div class="olive column">
+      Olive
+    </div>
+  </div>
+</div> -->
+
+<div class="ui page grid">
+        <div class="three column row">
+            <div class="column"> Horizontal section, column 1</div>
+            <div class="column"> Horizontal section, column 2</div>
+            <div class="column"> Horizontal section, column 3</div>
+        </div>
+        <div class="two column row">
+            <div class="column"> 
+                <div class="ui segment">
+                    <div class="ui vertical segment">
+                        <p>Left column, row 1</p>
+                    </div>
+                    <div class="ui vertical segment">
+                        <p>Left column, row 2</p>
+                    </div>
+                    <div class="ui vertical segment">
+                        <p>Left column, row 3</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="row"> Right column, row 1</div>
+                <div class="row"> Right column, row 2</div>
+            </div>
+        </div>
+    </div>
