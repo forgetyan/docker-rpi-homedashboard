@@ -11,14 +11,15 @@ CREATE TABLE homedashboard.dashboardtype (
 );
 CREATE TABLE homedashboard.dashboard (
   id int NOT NULL AUTO_INCREMENT,
+  menuId int NOT NULL,
   type int NOT NULL,
   position int NOT NULL,
-  sizemobile INT NOT NULL,
-  sizecomputer INT NOT NULL,
+  sizeMobile INT NOT NULL,
+  sizeComputer INT NOT NULL,
   color VARCHAR(20) NOT NULL,
   title VARCHAR(20) NOT NULL,
   configuration TEXT,
   PRIMARY KEY(id),
-  FOREIGN KEY (type) 
-  	REFERENCES dashboardtype(id)
+  FOREIGN KEY (menuId) REFERENCES menu(id),
+  FOREIGN KEY (type) REFERENCES dashboardtype(id)
 );

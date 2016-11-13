@@ -7,10 +7,16 @@ class NightscoutParameter implements JsonSerializable
 	{
 		$this->$siteUrl = $siteUrl;
 	}
+        
+        public static function jsonDeserialize($text)
+        {
+            $decode = json_decode($text, true);
+            $parameters = new NightscoutParameter($decode["siteUrl"]);
+        }
 	
 	public function getSiteUrl()
 	{
-		return $this->$siteUrl;
+		return $this->siteUrl;
 	}
 	
 	public function jsonSerialize()

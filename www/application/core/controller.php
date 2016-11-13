@@ -43,13 +43,20 @@ class Controller
      */
     public function loadModel()
     {
-        require APP . 'model/model.php';
+        require_once APP . 'model/model.php';
         // create new "model" (and pass the database connection)
-        $this->model = new Model($this->db);
+        if (!isset($this->model)){
+            $this->model = new Model($this->db);
+        }
     }
     
-    public function loadMenu($model)
+    public function loadMenu()
     {
-    	$model->menuItems = $this->model->getAllMenu();
+    	return $this->model->getAllMenu();
+    }
+    
+    public function loadDashboard()
+    {
+        return $this->model->getAllDashboardItems();
     }
 }

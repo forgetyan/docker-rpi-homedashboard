@@ -17,7 +17,29 @@ class Home extends Controller
     public function index()
     {
     	$model = new HomeViewModel();
-    	$this->loadMenu($model);
+    	$model->menuItems = $this->model->getAllMenu();
+        
+        // Search all dashboard items
+        $dashboardList = $this->model->getAllDashboardItems();;
+        
+        // Set all dashboard item in the proper menu viewmodel
+        foreach($dashboardList as $dashboardInstance)
+        {
+            foreach($model->menuItems as $menuInstance)
+            {
+                if($menuInstance->id == $dashboardInstance->menuId)
+                {
+                    $dashboardInstance->sizeMobileText = $this->convertNumberToText($dashboardInstance->sizeMobile);
+                    $dashboardInstance->sizeComputerText = $this->convertNumberToText($dashboardInstance->sizeComputer);
+                    $dashboardInstance->controllerName = $this->model->getControllerName($dashboardInstance->type);
+                    if(!isset($menuInstance->dashboards)){
+                        $menuInstance->dashboards = array();
+                    }
+                    $menuInstance->dashboards[$dashboardInstance->id] = $dashboardInstance;
+                }
+            }
+        }
+        
         // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/home/index.php';
@@ -48,5 +70,11 @@ class Home extends Controller
         require APP . 'view/_templates/header.php';
         require APP . 'view/home/example_two.php';
         require APP . 'view/_templates/footer.php';
+    }
+    
+    var $numberConvertion = array("zero", "one", "two", "tree", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve");
+    public function convertNumberToText($number)
+    {
+        return $this->numberConvertion[$number];
     }
 }

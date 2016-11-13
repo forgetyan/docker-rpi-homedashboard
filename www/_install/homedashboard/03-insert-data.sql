@@ -11,8 +11,7 @@ INSERT INTO homedashboard.dashboardtype (name, controller) VALUES
 ('Timer','timer/index'),
 ('Liste','list/index');
 
-INSERT INTO homedashboard.dashboard (type, position, sizemobile, sizecomputer, color, title, configuration TEXT) VALUES
-(1, 1, 8, 4, 'green', 'Glycémie Jérémy', '{  "siteUrl": "//jay-t1d.azurewebsites.net" }'),
-(2, 2, 8, 4, 'yellow', 'Météo', '{  "siteUrl": "//weather.gc.ca/wxlink/wxlink.html?cityCode=qc-13&amp;lang=f" }'),
-(1, 2, 8, 4, 'yellow', 'Glycémie Maxime', '{  "siteUrl": "//max-t1d.azurewebsites.net" }'),
-);
+INSERT INTO homedashboard.dashboard (menuId, type, position, sizeMobile, sizeComputer, color, title, configuration) VALUES
+(1, 1, 1, 8, 4, 'green', 'Glycémie Jérémy', '{  "siteUrl": "//jay-t1d.azurewebsites.net" }'),
+(1, 2, 2, 8, 4, 'yellow', 'Météo', '{  "siteUrl": "//weather.gc.ca/wxlink/wxlink.html?cityCode=qc-13&amp;lang=f" }'),
+(1, 1, 2, 8, 4, 'orange', 'Glycémie Maxime', '{  "siteUrl": "//max-t1d.azurewebsites.net" }');
