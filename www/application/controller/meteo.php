@@ -10,7 +10,10 @@ class Meteo extends Controller
 {
 	public function index($dashboardId)
 	{
+            $dashboardItem = $this->model->getDashboardItem($dashboardId);
+            $model = new DashboardBaseViewModel();
+            $model->dashboardId = $dashboardId;
             // load views
-            //require APP . 'view/meteo/index.php';
+            require APP . 'view/meteo/index.php';
 	}
 }
