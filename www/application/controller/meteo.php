@@ -11,6 +11,6 @@ class Meteo extends Controller
 	public function index($dashboardId)
 	{
             // load views
-            require APP . 'view/meteo/index.php';
+            //require APP . 'view/meteo/index.php';
 	}
 }

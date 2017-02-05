@@ -11,7 +11,6 @@ class NightscoutViewModel extends DashboardBaseViewModel implements JsonSerializ
     public $sgv = 0;
     public $tendency = 0;
     public $direction = 0;
-    public $directiontext = 0;
     public $minago = 0;
     public $percentbattery = 0;
     
@@ -21,7 +20,6 @@ class NightscoutViewModel extends DashboardBaseViewModel implements JsonSerializ
             'sgv' => $this->sgv,
             'tendency' => $this->tendency,
             'direction' => $this->direction,
-            'directiontext' => $this->directiontext,
             'minago' => $this->minago,
             'percentbattery' => $this->percentbattery
         ];

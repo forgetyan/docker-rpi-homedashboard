@@ -29,12 +29,22 @@ class Nightscout extends Controller
         $decode = json_decode($dashboardItem->configuration, true);
         $parameters = new NightscoutParameter($decode["siteUrl"]);
         // Call nightscout website
-        $nightscoutDataRaw = file_get_contents('http:'. $decode["siteUrl"] . '/api/v1/entries/sgv.json');
+        $nightscoutDataRaw = file_get_contents('http:'. $decode["siteUrl"] . '/api/v1/entries/sgv.json?count=3');
         $nightscoutData = json_decode($nightscoutDataRaw, true);
+        $nightscoutDeviceStatusRaw = file_get_contents('http:'. $decode["siteUrl"] . '/api/v1/devicestatus/?count=1');
+        $nightscoutDeviceStatus = json_decode($nightscoutDeviceStatusRaw, true);
         $viewModel = new NightscoutViewModel();
-        $viewModel->sgv = round($nightscoutData[0]['sgv'] / 18, 1);
+        $sgv1 = round($nightscoutData[0]['sgv'] / 18, 1);
+        $sgv2 = round($nightscoutData[1]['sgv'] / 18, 1);
+        $minago1 = round((time() - strtotime($nightscoutData[0]['dateString'])) / 60);
+        $minago2 = round((time() - strtotime($nightscoutData[1]['dateString'])) / 60);
+        $datediff = $minago2 - $minago1;
+        $viewModel->sgv = $sgv1;
+        $viewModel->direction = $nightscoutData[0]['direction'];
+        $viewModel->tendency = round(($sgv1 - $sgv2) * 5 / $datediff, 1);
         //$viewModel->minago = (getdate() - $nightscoutData[0]['date']) / 60;
-        $viewModel->minago = round((time() - strtotime($nightscoutData[0]['dateString'])) / 60);
+        $viewModel->minago = $minago1;
+        $viewModel->percentbattery = $nightscoutDeviceStatus[0]['uploaderBattery'];
         //var_dump($nightscoutData);
         echo json_encode($viewModel->jsonSerialize());
     }
