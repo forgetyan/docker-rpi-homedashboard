@@ -1,21 +1,21 @@
 {
-    "name": "panique/mini",
+    "name": "forgetyan/HomeDashboard",
     "type": "project",
-    "description": "An extremely simple naked PHP application",
-    "keywords": ["skeleton", "boilerplate", "naked", "barebone", "application"],
-    "homepage": "https://github.com/panique/mini",
+    "description": "A dashboard used at home on a dedicated screen",
+    "keywords": ["dashboard"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Panique",
+            "name": "forgetyan",
             "role": "Developer"
         }
     ],
     "support": {
-        "issues": "https://github.com/panique/mini/issues",
-        "source": "https://github.com/panique/mini"
+        "issues": "https://github.com/forgetyan/docker-rpi-homedashboard/issues",
+        "source": "https://github.com/forgetyan/docker-rpi-homedashboard"
     },
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+        "google/apiclient": "^2.0"
     }
 }

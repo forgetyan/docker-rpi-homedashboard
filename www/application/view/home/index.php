@@ -43,7 +43,7 @@
     }
     ?>
     
-    
+
     <!--
     <div class="eight wide mobile four wide computer column">
         <div class="green inverted ui segment center">

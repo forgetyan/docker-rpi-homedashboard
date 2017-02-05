@@ -10,7 +10,6 @@
  */
 
 // TODO get rid of this and work with namespaces + composer's autoloader
-
 // set a constant that holds the project's folder path, like "/var/www/".
 // DIRECTORY_SEPARATOR adds a slash to the end of the path
 define('ROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);
@@ -30,6 +29,7 @@ require APP . 'config/config.php';
 // If you want to load pdoDebug via Composer, then have a look here: https://github.com/panique/pdo-debug
 require APP . 'libs/helper.php';
 
+require APP . 'libs/google.php';
 // load application class
 require APP . 'core/application.php';
 require APP . 'core/controller.php';
