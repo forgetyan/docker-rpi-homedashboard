@@ -14,74 +14,51 @@ class Calendar extends Controller
         $model = new DashboardBaseViewModel();
         $model->dashboardId = $dashboardId;
         
-        /*if (!$oauth_credentials = getOAuthCredentialsFile()) {
-            echo missingOAuth2CredentialsWarning();
-            return;
+        global $client; // Google client
+        $calendarService = new Google_Service_Calendar($client);
+        
+        $optParams = array(
+          'maxResults' => 30,
+        );
+        
+        $calendarList = $calendarService->calendarList->listCalendarList($optParams);
+        foreach ($calendarList->getItems() as $calendarListEntry) {
+            echo $calendarListEntry->id . '<br>';
+            echo $calendarListEntry->getSummary() . '<br>';
         }
+        $calendarId = 'primary';
+        $dateend = new DateTime(date('c'));
+        $dateend->add(new DateInterval('P10D'));
+        $optParams = array(
+          'maxResults' => 30,
+          'orderBy' => 'startTime',
+          'singleEvents' => TRUE,
+          'timeMin' => date('c'),
+          'timeMax' => $dateend->format('c'),
+        );
         
-        /************************************************
-        * The redirect URI is to the current page, e.g:
-        * http://localhost:8080/simple-file-upload.php
-        ************************************************ /
-        $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
         
-        $client = new Google_Client();
-        $client->setAuthConfig($oauth_credentials);
-        $client->setRedirectUri($redirect_uri);
-        $client->addScope("https://www.googleapis.com/auth/drive");
-        $service = new Google_Service_Drive($client);
-        // add "?logout" to the URL to remove a token from the session
-        if (isset($_REQUEST['logout'])) {
-          unset($_SESSION['upload_token']);
+        $results = $calendarService->events->listEvents($calendarId, $optParams);
+        
+        if (count($results->getItems()) == 0) {
+            print "No upcoming events found.\n";
+        } else {
+            print "<br>Upcoming events:<br>\n";
+            foreach ($results->getItems() as $event) {
+              $start = $event->start->dateTime;
+              if (empty($start)) {
+                $start = $event->start->date;
+              }
+              printf("%s (%s)\n<br>", $event->getSummary(), $start);
+            }
         }
 
-        /************************************************
-        * If we have a code back from the OAuth 2.0 flow,
-        * we need to exchange that with the
-        * Google_Client::fetchAccessTokenWithAuthCode()
-        * function. We store the resultant access token
-        * bundle in the session, and redirect to ourself.
-        ************************************************ /
-        if (isset($_GET['code'])) {
-            $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-            $client->setAccessToken($token);
-         // store in the session also
-         $_SESSION['upload_token'] = $token;
-         // redirect back to the example
-         header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
-       }
-       // set the access token as part of the client
-       if (!empty($_SESSION['upload_token'])) {
-         $client->setAccessToken($_SESSION['upload_token']);
-         if ($client->isAccessTokenExpired()) {
-           unset($_SESSION['upload_token']);
-         }
-       } else {
-         $authUrl = $client->createAuthUrl();
-       }*/
-
-        //putenv('GOOGLE_APPLICATION_CREDENTIALS=' + __DIR__ . '/../oauth-credentials.json');
-        
-        $client = new Google_Client();
-        //$client->useApplicationDefaultCredentials();
-        //$client->setApplicationName("Home Dashboard");
-        //$client->setDeveloperKey("AIzaSyBy3p9XYO3D7eKJnFqV7hn-jBnfNCnuIUo");
-        $client->setAuthConfig(__DIR__ . '/../oauth-credentials.json');
-        $client->addScope(Google_Service_Drive::DRIVE);
-        //$client->addScope(Google_Service_Drive::CALENDAR);
-        $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-        $client->setRedirectUri($redirect_uri);
-        
-        if (isset($_GET['code'])) {
-            $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-            $client->setAccessToken($token);
-        }
-        
-        //$client->addScope(Google_Service_Drive::DRIVE);
-        /*$service = new Google_Service_Books($client);
+/*
+        $service = new Google_Service_Books($client);
         $optParams = array('filter' => 'free-ebooks');
         $results = $service->volumes->listVolumes('Henry David Thoreau', $optParams);
-*/
+        */
+        //var_dump($results);
         /*foreach ($results as $item) {
           echo $item['volumeInfo']['title'], "<br /> \n";
         }*/

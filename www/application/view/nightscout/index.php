@@ -17,7 +17,7 @@
             </div>
             
             <div class="label" style="text-align: left; margin-left:5px">
-                <span class="tendency">123</span>
+                <span class="tendency">&nbsp;</span>
                 mmol/L
             </div>
         </div>
